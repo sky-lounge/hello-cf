@@ -18,6 +18,8 @@ jobs:
     name: Unit test
     runs-on: ubuntu-latest
     steps:
+    - name: Checkout branch
+      uses: actions/checkout@v3
     - name: Unit test
       run: |
         if [ ! -f "nginx.conf" ]; then
