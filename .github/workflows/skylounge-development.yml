@@ -1,0 +1,99 @@
+---
+name: Development
+on:
+  push:
+    branches:
+    - main
+    paths:
+    - public
+    - nginx.conf
+    - skylounge
+    - cf/dev-manifest.yml
+    ignore_paths:
+    - .github/development-version.txt
+    - .github/production-version.txt
+  workflow_dispatch: null
+jobs:
+  unit-test:
+    name: Unit test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Unit test
+      run: |
+        if [ ! -f "nginx.conf" ]; then
+            echo "Missing nginx.conf"
+            exit 1
+        fi
+  deploy:
+    needs:
+    - unit-test
+    name: Deploy to development space
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout branch
+      uses: actions/checkout@v3
+    - name: Deploy
+      run: |
+        cf api $API
+        cf auth
+        cf target -o $ORG -s $SPACE
+        cf push -f $MANIFEST --strategy rolling
+        manifest=$(cat $MANIFEST)
+        app_name=${{ fromJSON(${manifest}).applications.name }}
+        cf set-label app $app_name "commit=${{ github.sha }}"
+      env:
+        API: https://api.de.a9s.eu
+        CF_USERNAME: "${{ secrets.CF_DEV_USERNAME }}"
+        CF_PASSWORD: "${{ secrets.CF_DEV_PASSWORD }}"
+        ORG: sgreenberg_rscale_io
+        SPACE: runner
+        MANIFEST: dev-manifest.yml
+  integration-test:
+    needs:
+    - deploy
+    name: Integration Test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Verify index page
+      run: |
+        set -ex
+        status_code=$(curl -L -o /dev/null -s -w "%{http_code}" ${ENDPOINT})
+        [[ 200 -eq $status_code ]] || (echo "CURL FAILED to return 200 status" && exit 1)
+        response=$(curl -L ${ENDPOINT})
+        [[ $response == *"Better Automation for Software Organizations"* ]] || (echo "CURL FAILED to return result containing substring: Better Automation for Software Organizations" && exit 1)
+      env:
+        ENDPOINT: https://hello-cf.de.a9sapp.eu
+  owasp-zap-full-scan:
+    needs:
+    - deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout source
+      uses: actions/checkout@v3
+    - name: Run OWASP Zap full scan
+      uses: zaproxy/action-full-scan@v0.4.0
+      id: scan
+      with:
+        target: https://hello-cf.de.a9sapp.eu
+        rules_file_name: skylounge/owasp/rules.cfg
+        issue_title: "OWASP Full Scan - ${{ github.run_number }}"
+        token: "${{ github.token }}"
+        fail_action: true
+  deployed-version:
+    needs:
+    - integration-test
+    - owasp-zap-full-scan
+    name: Update deployed version
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout branch
+      uses: actions/checkout@v3
+    - name: Update Artifact Version
+      run: |
+        git config user.name "GitHub Actions Bot"
+        git config user.email "service-account@cloud.gov"
+        echo "${{ github.sha }}" > .github/development-version.txt
+        git add .github/development-version.txt
+        git commit -m "update development version: ${{ github.sha }}"
+        git pull --rebase
+        git push
