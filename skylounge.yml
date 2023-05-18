@@ -1,0 +1,29 @@
+---
+blueprint-uri: sky-lounge/public-skylounge-library/blueprints/gcp/cloud-run/blueprint.yml
+params:
+  main_branch: main
+workflows:
+- workflow: development
+  params:
+    build_paths: # An array of paths which trigger the build job on change. Example: ["src/**", "build.gradle", "service.yaml"]
+    dev_endpoint: # The dev app route/enpdoint. Example: https://hello-cf.skylounge.dev
+  jobs:
+  - job: unit-test
+    steps:
+    - step: unit-test
+      uri: sky-lounge/skylounge-library/steps/unit-test/nginx/unit-test.yml
+  - job: deploy
+    steps:
+    - step: pre-deploy
+      uri: sky-lounge/skylounge-library/steps/no-step/step.yml
+    - step: deploy
+      uri: sky-lounge/skylounge-library/steps/cloudfoundry/deploy/deploy.yml
+      params:
+        cf_api: https://api.de.a9s.eu
+        cf_manifest: dev-manifest.yml
+        cf_org: # The CF org. Example: "myagency"
+        cf_password: "${{ secrets.CF_DEV_PASSWORD }}"
+        cf_space: # The CF space. Example: "development"
+        cf_username: "${{ secrets.CF_DEV_USERNAME }}"
+  - job: integration-test
+    uri: # The URI to your integration tests job definition. Example: sky-lounge/hello-cf/skylounge/integration-test.yml
