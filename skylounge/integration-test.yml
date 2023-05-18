@@ -1,5 +1,5 @@
 integration-test:
-  needs: configure-access
+  needs: [deploy]
   name: Integration Test
   runs-on: ubuntu-latest
   steps:
