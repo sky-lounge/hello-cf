@@ -20,7 +20,7 @@ workflows:
       uri: sky-lounge/skylounge-library/steps/cloudfoundry/deploy/deploy.yml
       params:
         cf_api: https://api.de.a9s.eu
-        cf_manifest: dev-manifest.yml
+        cf_manifest: cf/dev-manifest.yml
         cf_org: sgreenberg_rscale_io
         cf_password: "${{ secrets.CF_DEV_PASSWORD }}"
         cf_space: runner
