@@ -2,8 +2,8 @@
 skylounge-config:
   id: "skylounge.yml"
   uri: "sky-lounge/hello-cf/skylounge.yml"
-  oid: "6c76d9001a76d888bca34beddcd978cce953f328"
-  version-url: "/sky-lounge/hello-cf/blob/6c76d9001a76d888bca34beddcd978cce953f328/skylounge.yml"
+  oid: "620f027d6454e82cd8598bf8ec37df930e094609"
+  version-url: "/sky-lounge/hello-cf/blob/620f027d6454e82cd8598bf8ec37df930e094609/skylounge.yml"
 blueprint:
   id: "blueprint"
   uri: "sky-lounge/skylounge-library/blueprints/cloudfoundry/bosh/blueprint.yml"
@@ -30,8 +30,8 @@ workflows:
     version-url: "/sky-lounge/skylounge-library/blob/7cdeefcdb2fda28c933ff6aba07369960e7437c8/steps/no-step/step.yml"
   - id: "deploy"
     uri: "sky-lounge/skylounge-library/steps/cloudfoundry/deploy/deploy.yml"
-    oid: "1a129f2ffbac636685f9a87994facaaa65f8a328"
-    version-url: "/sky-lounge/skylounge-library/blob/1a129f2ffbac636685f9a87994facaaa65f8a328/steps/cloudfoundry/deploy/deploy.yml"
+    oid: "7a4767b63869d7ee2e84d9ac95fd05f602fa1c51"
+    version-url: "/sky-lounge/skylounge-library/blob/7a4767b63869d7ee2e84d9ac95fd05f602fa1c51/steps/cloudfoundry/deploy/deploy.yml"
 - id: "promote"
   uri: "sky-lounge/skylounge-library/blueprints/cloudfoundry/bosh/workflow-templates/promote.yml"
   oid: "34b1801ea1c19ebbcfa242a78f2d47477c8cad73"

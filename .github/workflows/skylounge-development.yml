@@ -32,14 +32,20 @@ jobs:
     steps:
     - name: Checkout branch
       uses: actions/checkout@v3
+    - name: Extract Manifest values
+      id: manifest
+      uses: pietrobolcato/action-read-yaml@1.0.0
+      with:
+        config: "${{ github.workspace }}/${MANIFEST}"
+      env:
+        MANIFEST: cf/dev-manifest.yml
     - name: Deploy
       run: |
         cf api $API
         cf auth
         cf target -o $ORG -s $SPACE
         cf push -f $MANIFEST --strategy rolling
-        manifest=$(cat $MANIFEST)
-        app_name=${{ fromJSON(${manifest}).applications.name }}
+        app_name=${{ steps.manifest.outputs['applications.name'] }}
         cf set-label app $app_name "commit=${{ github.sha }}"
       env:
         API: https://api.de.a9s.eu
@@ -47,7 +53,7 @@ jobs:
         CF_PASSWORD: "${{ secrets.CF_DEV_PASSWORD }}"
         ORG: sgreenberg_rscale_io
         SPACE: runner
-        MANIFEST: dev-manifest.yml
+        MANIFEST: cf/dev-manifest.yml
   integration-test:
     needs:
     - deploy
