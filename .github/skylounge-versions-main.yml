@@ -12,8 +12,8 @@ blueprint:
 workflows:
 - id: "development"
   uri: "sky-lounge/skylounge-library/blueprints/cloudfoundry/bosh/workflow-templates/development.yml"
-  oid: "a9ddfd3ae61696fc1d09e4e3becaf6a4e6873e27"
-  version-url: "/sky-lounge/skylounge-library/blob/a9ddfd3ae61696fc1d09e4e3becaf6a4e6873e27/blueprints/cloudfoundry/bosh/workflow-templates/development.yml"
+  oid: "f777cdc88a26bc5992def8040d0c126f1282433e"
+  version-url: "/sky-lounge/skylounge-library/blob/f777cdc88a26bc5992def8040d0c126f1282433e/blueprints/cloudfoundry/bosh/workflow-templates/development.yml"
   jobs:
   - id: "integration-test"
     uri: "sky-lounge/hello-cf/skylounge/integration-test.yml"
