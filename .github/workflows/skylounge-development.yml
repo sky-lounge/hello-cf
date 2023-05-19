@@ -30,6 +30,8 @@ jobs:
     - unit-test
     name: Deploy to development space
     runs-on: ubuntu-latest
+    outputs:
+      route: "${{ steps.deploy.outputs.route }}"
     steps:
     - name: Checkout branch
       uses: actions/checkout@v3
@@ -49,6 +51,7 @@ jobs:
         mv cf8 cf
         chmod +x cf
     - name: Deploy
+      id: deploy
       run: |
         cf-cli/cf api $API
         cf-cli/cf auth
@@ -56,6 +59,8 @@ jobs:
         cf-cli/cf push -f $MANIFEST --strategy rolling
         app_name=${{ steps.manifest.outputs['applications.0.name'] }}
         cf-cli/cf set-label app $app_name "commit=${{ github.sha }}"
+        route=${{ steps.manifest.outputs['applications.0.routes.0.route'] }}
+        echo "route=${route}" >> $GITHUB_OUTPUTS
       env:
         API: https://api.de.a9s.eu
         CF_USERNAME: "${{ secrets.CF_DEV_USERNAME }}"
@@ -72,12 +77,12 @@ jobs:
     - name: Verify index page
       run: |
         set -ex
-        status_code=$(curl -L -o /dev/null -s -w "%{http_code}" ${ENDPOINT})
+        status_code=$(curl -L -o /dev/null -s -w "%{http_code}" https://${ROUTE})
         [[ 200 -eq $status_code ]] || (echo "CURL FAILED to return 200 status" && exit 1)
-        response=$(curl -L ${ENDPOINT})
+        response=$(curl -L https://${ROUTE})
         [[ $response == *"Better Automation for Software Organizations"* ]] || (echo "CURL FAILED to return result containing substring: Better Automation for Software Organizations" && exit 1)
       env:
-        ENDPOINT: https://hello-cf.de.a9sapp.eu
+        ROUTE: "${{ needs.deploy.outputs.route }}"
   owasp-zap-full-scan:
     needs:
     - deploy
@@ -89,11 +94,13 @@ jobs:
       uses: zaproxy/action-full-scan@v0.4.0
       id: scan
       with:
-        target: https://hello-cf.de.a9sapp.eu
+        target: "https://${{ env.ROUTE }}"
         rules_file_name: skylounge/owasp/rules.cfg
         issue_title: "OWASP Full Scan - ${{ github.run_number }}"
         token: "${{ github.token }}"
         fail_action: true
+      env:
+        ROUTE: "${{needs.deploy.outputs.route}}"
   deployed-version:
     needs:
     - integration-test
