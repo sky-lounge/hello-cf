@@ -1,7 +1,7 @@
 applications:
   - name: hello-cf
     buildpacks:
-      - staticfile_buildpack
+      - https://github.com/cloudfoundry/nginx-buildpack.git
     disk_quota: 64M
     instances: 1
     memory: 32M
