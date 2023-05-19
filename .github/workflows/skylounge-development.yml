@@ -48,6 +48,8 @@ jobs:
         rm cf
         mv cf8 cf
         chmod +x cf
+        echo ${{ steps.manifest.outputs['applications.0.name'] }}
+        echo ${{ steps.manifest.outputs[] }}
     - name: Deploy
       run: |
         cf-cli/cf api $API
