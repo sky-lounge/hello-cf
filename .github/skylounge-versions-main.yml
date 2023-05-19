@@ -22,8 +22,8 @@ workflows:
   steps:
   - id: "unit-test"
     uri: "sky-lounge/skylounge-library/steps/unit-test/nginx/unit-test.yml"
-    oid: "d679aca0ed87a9a1426343f620eefbf136450dea"
-    version-url: "/sky-lounge/skylounge-library/blob/d679aca0ed87a9a1426343f620eefbf136450dea/steps/unit-test/nginx/unit-test.yml"
+    oid: "4a9aebc54594e4ff87c4950447ebe4536c6d1437"
+    version-url: "/sky-lounge/skylounge-library/blob/4a9aebc54594e4ff87c4950447ebe4536c6d1437/steps/unit-test/nginx/unit-test.yml"
   - id: "pre-deploy"
     uri: "sky-lounge/skylounge-library/steps/no-step/step.yml"
     oid: "7cdeefcdb2fda28c933ff6aba07369960e7437c8"
