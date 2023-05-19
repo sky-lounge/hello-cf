@@ -9,8 +9,6 @@ jobs:
     permissions:
       issues: write
     steps:
-      - name: Checkout branch
-        uses: actions/checkout@v3
       - name: Update Artifact Version
         run: |
           curl -L \
