@@ -35,7 +35,7 @@ jobs:
       uses: actions/checkout@v3
     - name: Extract Manifest values
       id: manifest
-      uses: pietrobolcato/action-read-yaml@1.0.0
+      uses: pietrobolcato/action-read-yaml@1.1.0
       with:
         config: "${{ github.workspace }}/${{ env.MANIFEST }}"
       env:
@@ -48,8 +48,6 @@ jobs:
         rm cf
         mv cf8 cf
         chmod +x cf
-        echo ${{ steps.manifest.outputs['applications.0.name'] }}
-        echo ${{ steps.manifest.outputs['applications'] }}
     - name: Deploy
       run: |
         cf-cli/cf api $API
