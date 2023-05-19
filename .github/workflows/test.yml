@@ -6,8 +6,7 @@ jobs:
   deployed-version:
     name: Update deployed version
     runs-on: ubuntu-latest
-    permissions:
-      issues: write
+    permissions: write-all
     steps:
       - name: Update Artifact Version
         run: |
