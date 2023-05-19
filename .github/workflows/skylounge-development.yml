@@ -5,10 +5,9 @@ on:
     branches:
     - main
     paths:
-    - public
-    - nginx.conf
-    - skylounge
     - cf/dev-manifest.yml
+    - skylounge/integration-test.yml
+    - src
     ignore_paths:
     - .github/development-version.txt
     - .github/production-version.txt
