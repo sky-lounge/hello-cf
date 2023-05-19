@@ -5,6 +5,6 @@ applications:
     disk_quota: 64M
     instances: 1
     memory: 32M
-    path: src/
+    path: ../src/
     routes:
       - route: hello-cf.de.a9sapp.eu
