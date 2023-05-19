@@ -11,4 +11,4 @@ integration-test:
         response=$(curl -L https://${ROUTE})
         [[ $response == *"Better Automation for Software Organizations"* ]] || (echo "CURL FAILED to return result containing substring: Better Automation for Software Organizations" && exit 1)
       env:
-        ROUTE: ${{needs.deploy.outputs.route}}
+        ROUTE: ${{ needs.deploy.outputs.route }}
