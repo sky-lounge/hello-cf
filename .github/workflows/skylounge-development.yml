@@ -60,7 +60,7 @@ jobs:
         app_name=${{ steps.manifest.outputs['applications.0.name'] }}
         cf-cli/cf set-label app $app_name "commit=${{ github.sha }}"
         route=${{ steps.manifest.outputs['applications.0.routes.0.route'] }}
-        echo "route=${route}" >> $GITHUB_OUTPUTS
+        echo "route=${route}" >> $GITHUB_OUTPUT
       env:
         API: https://api.de.a9s.eu
         CF_USERNAME: "${{ secrets.CF_DEV_USERNAME }}"
