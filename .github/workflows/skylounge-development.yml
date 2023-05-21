@@ -106,7 +106,7 @@ jobs:
   update-deployed-version:
     needs:
     - integration-test
-    - owasp-zap-full-scan
+    - owasp-zap-scan
     name: Update deployed version
     runs-on: ubuntu-latest
     steps:
