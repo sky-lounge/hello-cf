@@ -17,7 +17,7 @@ jobs:
     name: Unit test
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout branch
+    - name: Checkout source
       uses: actions/checkout@v3
     - name: Unit test
       run: |
@@ -33,7 +33,7 @@ jobs:
     outputs:
       route: "${{ steps.deploy.outputs.route }}"
     steps:
-    - name: Checkout branch
+    - name: Checkout source
       uses: actions/checkout@v3
     - name: Extract Manifest values
       id: manifest
@@ -87,6 +87,8 @@ jobs:
     needs:
     - deploy
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
     steps:
     - name: Checkout source
       uses: actions/checkout@v3
@@ -101,16 +103,14 @@ jobs:
         fail_action: false
       env:
         ROUTE: "${{needs.deploy.outputs.route}}"
-  deployed-version:
+  update-deployed-version:
     needs:
     - integration-test
     - owasp-zap-full-scan
     name: Update deployed version
     runs-on: ubuntu-latest
-    permissions:
-      issues: write
     steps:
-    - name: Checkout branch
+    - name: Checkout source
       uses: actions/checkout@v3
     - name: Update Artifact Version
       run: |
