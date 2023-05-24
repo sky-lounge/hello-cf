@@ -1,0 +1,60 @@
+---
+skylounge-config:
+  id: "skylounge.yml"
+  uri: "sky-lounge/hello-cf/skylounge.yml"
+  oid: "4a08c4283949884f42ceb5bd1e62d1f354b69693"
+  version-url: "/sky-lounge/hello-cf/blob/4a08c4283949884f42ceb5bd1e62d1f354b69693/skylounge.yml"
+blueprint:
+  id: "blueprint"
+  uri: "sky-lounge/skylounge-library/blueprints/cloudfoundry/bosh/blueprint.yml"
+  oid: "3d6240a8f49e0ccd201b8726f8bffb5052dede32"
+  version-url: "/sky-lounge/skylounge-library/blob/3d6240a8f49e0ccd201b8726f8bffb5052dede32/blueprints/cloudfoundry/bosh/blueprint.yml"
+workflows:
+- id: "pull-request"
+  uri: "sky-lounge/skylounge-library/blueprints/cloudfoundry/bosh/workflow-templates/pull-request.yml"
+  oid: "d689b6fc81d7add70667f3b6ea1485320933706a"
+  version-url: "/sky-lounge/skylounge-library/blob/d689b6fc81d7add70667f3b6ea1485320933706a/blueprints/cloudfoundry/bosh/workflow-templates/pull-request.yml"
+  jobs: []
+  steps:
+  - id: "unit-test"
+    uri: "sky-lounge/skylounge-library/steps/unit-test/nginx/unit-test.yml"
+    oid: "4a9aebc54594e4ff87c4950447ebe4536c6d1437"
+    version-url: "/sky-lounge/skylounge-library/blob/4a9aebc54594e4ff87c4950447ebe4536c6d1437/steps/unit-test/nginx/unit-test.yml"
+- id: "development"
+  uri: "sky-lounge/skylounge-library/blueprints/cloudfoundry/bosh/workflow-templates/development.yml"
+  oid: "0215519c2242a3350c1eae936a7e2acfeec1228b"
+  version-url: "/sky-lounge/skylounge-library/blob/0215519c2242a3350c1eae936a7e2acfeec1228b/blueprints/cloudfoundry/bosh/workflow-templates/development.yml"
+  jobs:
+  - id: "integration-test"
+    uri: "sky-lounge/hello-cf/skylounge/integration-test.yml"
+    oid: "b5d89472a0777a0c5a2c515d2626f148c23ce086"
+    version-url: "/sky-lounge/hello-cf/blob/b5d89472a0777a0c5a2c515d2626f148c23ce086/skylounge/integration-test.yml"
+  steps:
+  - id: "pre-deploy"
+    uri: "sky-lounge/skylounge-library/steps/no-step/step.yml"
+    oid: "7cdeefcdb2fda28c933ff6aba07369960e7437c8"
+    version-url: "/sky-lounge/skylounge-library/blob/7cdeefcdb2fda28c933ff6aba07369960e7437c8/steps/no-step/step.yml"
+  - id: "deploy"
+    uri: "sky-lounge/skylounge-library/steps/cloudfoundry/deploy/deploy.yml"
+    oid: "ae63415c6865e6400582ca24076fb6707f349bd2"
+    version-url: "/sky-lounge/skylounge-library/blob/ae63415c6865e6400582ca24076fb6707f349bd2/steps/cloudfoundry/deploy/deploy.yml"
+- id: "promote"
+  uri: "sky-lounge/skylounge-library/blueprints/cloudfoundry/bosh/workflow-templates/promote.yml"
+  oid: "ab03000ddf90b1c9c783af880fa4468d2449da52"
+  version-url: "/sky-lounge/skylounge-library/blob/ab03000ddf90b1c9c783af880fa4468d2449da52/blueprints/cloudfoundry/bosh/workflow-templates/promote.yml"
+  jobs: []
+  steps: []
+- id: "production"
+  uri: "sky-lounge/skylounge-library/blueprints/cloudfoundry/bosh/workflow-templates/production.yml"
+  oid: "876540bd32d5c6f8c3cbecf5c9f6a27983522b16"
+  version-url: "/sky-lounge/skylounge-library/blob/876540bd32d5c6f8c3cbecf5c9f6a27983522b16/blueprints/cloudfoundry/bosh/workflow-templates/production.yml"
+  jobs: []
+  steps:
+  - id: "pre-deploy"
+    uri: "sky-lounge/skylounge-library/steps/no-step/step.yml"
+    oid: "7cdeefcdb2fda28c933ff6aba07369960e7437c8"
+    version-url: "/sky-lounge/skylounge-library/blob/7cdeefcdb2fda28c933ff6aba07369960e7437c8/steps/no-step/step.yml"
+  - id: "deploy"
+    uri: "sky-lounge/skylounge-library/steps/cloudfoundry/deploy/deploy.yml"
+    oid: "ae63415c6865e6400582ca24076fb6707f349bd2"
+    version-url: "/sky-lounge/skylounge-library/blob/ae63415c6865e6400582ca24076fb6707f349bd2/steps/cloudfoundry/deploy/deploy.yml"
