@@ -5,8 +5,7 @@ on:
     branches:
     - main
     paths:
-    - public
-    - nginx.conf
+    - src
     - skylounge
     - cf/dev-manifest.yml
     ignore_paths:
