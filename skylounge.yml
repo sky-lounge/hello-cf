@@ -1,0 +1,15 @@
+---
+blueprint-uri: sky-lounge/skylounge-library/blueprints/cloudfoundry/bosh/blueprint.yml
+params:
+  main_branch: main
+workflows:
+- workflow: pull-request
+  jobs:
+  - job: unit-test
+    steps:
+    - step: unit-test
+      uri: sky-lounge/skylounge-library/steps/unit-test/nginx/unit-test.yml
+  - job: dependency-review
+    params:
+      config_file: sky-lounge/skylounge-library/jobs/github/security/dependency-review/config/cloud-gov.yml@main
+      external_repo_token: "${{ secrets.LIBRARY_TOKEN }}"
