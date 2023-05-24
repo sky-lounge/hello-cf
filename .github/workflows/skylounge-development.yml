@@ -5,8 +5,8 @@ on:
     branches:
     - main
     paths:
-    - src
-    - skylounge
+    - src/**
+    - skylounge/**
     - cf/dev-manifest.yml
     ignore_paths:
     - .github/development-version.txt

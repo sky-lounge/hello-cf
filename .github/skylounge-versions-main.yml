@@ -2,8 +2,8 @@
 skylounge-config:
   id: "skylounge.yml"
   uri: "sky-lounge/hello-cf/skylounge.yml"
-  oid: "e1dd16295b454d5106211660d20434783d1dc1a9"
-  version-url: "/sky-lounge/hello-cf/blob/e1dd16295b454d5106211660d20434783d1dc1a9/skylounge.yml"
+  oid: "2c1b17938f153a169762753014d1dfb5e5b1b4da"
+  version-url: "/sky-lounge/hello-cf/blob/2c1b17938f153a169762753014d1dfb5e5b1b4da/skylounge.yml"
 blueprint:
   id: "blueprint"
   uri: "sky-lounge/skylounge-library/blueprints/cloudfoundry/bosh/blueprint.yml"
