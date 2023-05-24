@@ -6,8 +6,7 @@ on:
     - opened
     - reopened
     paths:
-    - public
-    - nginx.conf
+    - src
     - skylounge
     - cf/dev-manifest.yml
 permissions:
