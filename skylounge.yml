@@ -2,7 +2,7 @@
 blueprint-uri: sky-lounge/skylounge-library/blueprints/cloudfoundry/bosh/blueprint.yml
 params:
   main_branch: main
-  build_paths: ["public","nginx.conf","skylounge","cf/dev-manifest.yml"]
+  build_paths: ["src","skylounge","cf/dev-manifest.yml"]
 workflows:
 - workflow: pull-request
   jobs:
