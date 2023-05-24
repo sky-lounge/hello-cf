@@ -2,8 +2,8 @@
 skylounge-config:
   id: "skylounge.yml"
   uri: "sky-lounge/hello-cf/skylounge.yml"
-  oid: "4a08c4283949884f42ceb5bd1e62d1f354b69693"
-  version-url: "/sky-lounge/hello-cf/blob/4a08c4283949884f42ceb5bd1e62d1f354b69693/skylounge.yml"
+  oid: "c4e8537f3d50ba35dd5e28ceb62ac22f9786a92a"
+  version-url: "/sky-lounge/hello-cf/blob/c4e8537f3d50ba35dd5e28ceb62ac22f9786a92a/skylounge.yml"
 blueprint:
   id: "blueprint"
   uri: "sky-lounge/skylounge-library/blueprints/cloudfoundry/bosh/blueprint.yml"
@@ -12,8 +12,8 @@ blueprint:
 workflows:
 - id: "pull-request"
   uri: "sky-lounge/skylounge-library/blueprints/cloudfoundry/bosh/workflow-templates/pull-request.yml"
-  oid: "d689b6fc81d7add70667f3b6ea1485320933706a"
-  version-url: "/sky-lounge/skylounge-library/blob/d689b6fc81d7add70667f3b6ea1485320933706a/blueprints/cloudfoundry/bosh/workflow-templates/pull-request.yml"
+  oid: "14f0c2d555ff38fa41ec3a7a0ea765b0c4ec3d66"
+  version-url: "/sky-lounge/skylounge-library/blob/14f0c2d555ff38fa41ec3a7a0ea765b0c4ec3d66/blueprints/cloudfoundry/bosh/workflow-templates/pull-request.yml"
   jobs: []
   steps:
   - id: "unit-test"
