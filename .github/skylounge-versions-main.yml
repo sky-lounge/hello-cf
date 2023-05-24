@@ -12,8 +12,8 @@ blueprint:
 workflows:
 - id: "pull-request"
   uri: "sky-lounge/skylounge-library/blueprints/cloudfoundry/bosh/workflow-templates/pull-request.yml"
-  oid: "34875473bab0daf31ac0fdb76e44c86362e2c46d"
-  version-url: "/sky-lounge/skylounge-library/blob/34875473bab0daf31ac0fdb76e44c86362e2c46d/blueprints/cloudfoundry/bosh/workflow-templates/pull-request.yml"
+  oid: "1ddb5c51373f78943aa4804895a84f09a5583270"
+  version-url: "/sky-lounge/skylounge-library/blob/1ddb5c51373f78943aa4804895a84f09a5583270/blueprints/cloudfoundry/bosh/workflow-templates/pull-request.yml"
   jobs: []
   steps:
   - id: "unit-test"
