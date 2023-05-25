@@ -40,8 +40,8 @@ workflows:
     version-url: "/sky-lounge/skylounge-library/blob/ae63415c6865e6400582ca24076fb6707f349bd2/steps/cloudfoundry/deploy/deploy.yml"
 - id: "promote"
   uri: "sky-lounge/skylounge-library/blueprints/cloudfoundry/bosh/workflow-templates/promote.yml"
-  oid: "10564a77737a7669d0ff6f326b67361d6d9051d7"
-  version-url: "/sky-lounge/skylounge-library/blob/10564a77737a7669d0ff6f326b67361d6d9051d7/blueprints/cloudfoundry/bosh/workflow-templates/promote.yml"
+  oid: "76907cc27918d25ad7ef3089cfb2169caa6078f6"
+  version-url: "/sky-lounge/skylounge-library/blob/76907cc27918d25ad7ef3089cfb2169caa6078f6/blueprints/cloudfoundry/bosh/workflow-templates/promote.yml"
   jobs: []
   steps: []
 - id: "production"
