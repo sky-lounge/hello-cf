@@ -22,8 +22,8 @@ workflows:
     version-url: "/sky-lounge/skylounge-library/blob/4a9aebc54594e4ff87c4950447ebe4536c6d1437/steps/unit-test/nginx/unit-test.yml"
 - id: "development"
   uri: "sky-lounge/skylounge-library/blueprints/cloudfoundry/bosh/workflow-templates/development.yml"
-  oid: "3cda4b01f5c5cd225b5c61a92148e674b0dcc549"
-  version-url: "/sky-lounge/skylounge-library/blob/3cda4b01f5c5cd225b5c61a92148e674b0dcc549/blueprints/cloudfoundry/bosh/workflow-templates/development.yml"
+  oid: "c03caae0ebb1acedaf6eb0e30b28ec7a3b3e8c8f"
+  version-url: "/sky-lounge/skylounge-library/blob/c03caae0ebb1acedaf6eb0e30b28ec7a3b3e8c8f/blueprints/cloudfoundry/bosh/workflow-templates/development.yml"
   jobs:
   - id: "integration-test"
     uri: "sky-lounge/hello-cf/skylounge/integration-test.yml"
